@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+        <h:outputStylesheet library="css" name="estilo.css" />
+        <title>..:: SAED 2021 UNSE ::..</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="contenedor">
+                <div id="top">
+                    <h1>SEDE  ADMINISTRADORA  DE  ESCUELAS  DIOSESANAS</h1>
+                    <h2>CALENDARIO  DE  EVENTOS</h2>
+                    <br/>
+                    <ui:insert name="cabecera"></ui:insert>
+                </div>        
+                <div id="nav"> 
+                    <ul>                       
+                        <ui:insert name="menu"></ui:insert>
+                    </ul>                   
+
+                </div>
+                <div id="contenido">
+                    <ui:insert name="content">
+                    </ui:insert>
+                </div>
+                <div id="bottom">
+                    <ui:insert name="pie"></ui:insert>
+                   Año 2021
+                    <p>DESARROLLDORES: ALEJANDRO SUAREZ MINAKH - ROBLES DAMIAN MAXIMILIANO</p>
+                </div>
+            </div>
+            
+            body { 
+    display: block;  
+    background-color: #ffcccc;
+}
+#contenedor{
+    margin: 0px auto;
+    width: 90%;   
+}
+h1,h2{
+    text-align: center;
+}
+p{
+    font: 16pt Garamond;
+    /*    font-family: Garamond;
+        font-size: 16pt;*/
+}
+#top{
+    background-color: grey;
+    color: white;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+#nav{
+    background-color: #666666;
+     overflow: hidden;
+    border: 5px double;
+    height: 150px;
+}
+#nav ul{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    width : 200px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;  
+}
+#nav ul li{
+    background-color : #999999;
+    padding: 10px;
+    width: 200px;
+}
+#nav ul li a{  
+    color : #000;
+    text-decoration : none ;
+    text-transform : uppercase ;
+    display : block ;  
+    padding : 10px 10px 10px 20px;
+    width: 200px;
+}
+
+#nav ul li a:hover{
+    cursor : pointer ;
+    background : #33cc00;
+    border-left : 10px solid #333;
+    color : #33c;
+}
+#contenido{ 
+    padding-left: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    background-color: #cccccc;
+}
+#bottom{
+    text-align: center;
+    font-style: italic;
+    clear: both;
+    background-color: #666600;
+}
+.error{
+    color: red;
+    font-weight: bold;
+}
+.linea{
+    border: solid;
+}
+            
+        </h:form>
+    </h:body>
+
+</html>

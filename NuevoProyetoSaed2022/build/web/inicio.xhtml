@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/plantilla.xhtml">
+
+            <ui:define name="menu" >
+                <p:menubar autoDisplay="false">
+                    <p:submenu label="Eventos">
+                        <p:menuitem value="Nuevo evento" url="#" />
+                        <p:menuitem value="Modificar evento" url="#"/>
+                        <p:menuitem value="Borrar evento" url="#"/>
+                    </p:submenu>
+                    <p:submenu label="Institucion">
+                        <p:menuitem value="Agregar institución" url="#"/>
+                        <p:menuitem value="Modificar institución" url="#"/>
+                        <p:menuitem value="Borrar institución" url="#"/>
+                    </p:submenu>
+                    <p:submenu label="Lugar">
+                        <p:menuitem value="Agregar lugar" url="#"/>
+                        <p:menuitem value="Modificar lugar" url="#"/>
+                        <p:menuitem value="Borrar lugar" url="#"/>
+                    </p:submenu>
+                    <p:submenu label="Usuarios">
+                        <p:menuitem value="Agregar usuario" url="#"/>
+                        <p:menuitem value="Modificar usuario" url="#"/>
+                        <p:menuitem value="Borrar usuario" url="#"/>
+                    </p:submenu>
+                </p:menubar>
+                <div class="p-col-12 p-md-4">
+                    <div class="card">
+                        <h5>Nombre Usuario: </h5>                       
+                        <p:avatar icon="pi pi-user" styleClass="p-mr-2" size="large" style="background-color:#2196F3; color:#fff" shape="circle" />
+                    </div>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">              
+                <h:form>
+                    <p:growl id="messages" showDetail="true"/>
+
+                    <p:schedule id="schedule" value="#{scheduleJava8View.eventModel}" widgetVar="myschedule">
+                        <p:ajax event="dateSelect" listener="#{scheduleJava8View.onDateSelect}" update="eventDetails"
+                                oncomplete="PF('eventDialog').show();"/>
+                        <p:ajax event="eventSelect" listener="#{scheduleJava8View.onEventSelect}" update="eventDetails"
+                                oncomplete="PF('eventDialog').show();"/>
+                        <p:ajax event="eventMove" listener="#{scheduleJava8View.onEventMove}" update="messages"/>
+                        <p:ajax event="eventResize" listener="#{scheduleJava8View.onEventResize}" update="messages"/>
+                    </p:schedule>
+
+                    <p:dialog widgetVar="eventDialog" header="DETALLES DEL EVENTO" 
+                              showEffect="fade" hideEffect="fade" modal="true">
+                        <h:panelGrid id="eventDetails" columns="2" cellpadding="7">
+
+                            <p:outputLabel for="title" value="Descripcion" styleClass="p-text-bold"/>
+                            <p:inputText id="title" value="#{eventoController.evento.descripcion}" />
+
+                            <p:outputLabel for="title2" value="Lugar" styleClass="p-text-bold"/>
+                            <p:inputText id="title2" value="#{eventoController.evento.descripcion}"/>
+
+                            <p:outputLabel for="from" value="Desde" styleClass="p-text-bold"/>
+                            <p:datePicker id="from" value="#{eventoController.evento.fecharegistro}" pattern="dd/MM/yyyy"
+                                          showTime="true" appendTo="@(body)"/>
+
+                            <p:outputLabel for="to" value="Hasta" styleClass="p-text-bold"/>
+                            <p:datePicker id="to" value="#{eventoController.evento.fechaevento}" pattern="dd/MM/yyyy"
+                                          showTime="true" appendTo="@(body)"/>
+
+                            <p:outputLabel for="title3" value="creadorEvento" styleClass="p-text-bold"/>
+                            <p:inputText id="title3" value="#{eventoController.evento.creadorEvento}" />
+
+                            <p:outputLabel for="title4" value="Cant Personas SAED" styleClass="p-text-bold"/>
+                            <p:inputText id="title4" value="#{eventoController.evento.cantPersSAED}"/>
+
+                            <p:outputLabel for="title5" value="Cant Personas EXT" styleClass="p-text-bold"/>
+                            <p:inputText id="title5" value="#{eventoController.evento.cantPersExt}" />
+
+                            <p:outputLabel for="title6" value="Institucion" styleClass="p-text-bold"/>
+                            <p:inputText id="title6" value="#{eventoController.evento.institucion}"/>
+
+                            <h5>Refrigerio</h5>
+                            <p:selectBooleanButton onLabel="Yes" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                   style="width:6rem" value="#{eventoController.evento.refrigerio}"/>
+
+                            <p:outputLabel for="title7" value="Sacerdote" styleClass="p-text-bold"/>
+                            <p:inputText id="title7" value="#{eventoController.evento.sacerdote}"/>
+
+                            <p:outputLabel for="title8" value="Nombre Entrevistador" styleClass="p-text-bold"/>
+                            <p:inputText id="title8" value="#{eventoController.evento.nomEntrevistador}"/>
+
+                            <p:outputLabel for="title9" value="Nombre Entrevistado" styleClass="p-text-bold"/>
+                            <p:inputText id="title9" value="#{eventoController.evento.nomEntrevistado}"/>
+
+                            <p:outputLabel for="title10" value="Observacion" styleClass="p-text-bold"/>
+                            <p:inputText id="title10" value="#{eventoController.evento.observacion}" />
+
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:commandButton id="addButton" 
+                                             value="Guardar" 
+                                             ajax="false"
+                                             actionListener="#{eventoController.addEvent}"
+                                             />
+                        </h:panelGrid>
+
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
